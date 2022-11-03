@@ -5,13 +5,17 @@ import RightPanel from "../rightPanel/RightPanel"
 import '../../style.scss'
 import { useContext } from "react"
 import { DarkModeContext } from "../../context/darkModeContext"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 const Layout = () => {
 
   const { darkMode } = useContext(DarkModeContext)
 
+  const queryClient = new QueryClient()
+
   return (
-    <div className={`theme-${darkMode ? "dark" : "light"}`}>
+    <QueryClientProvider client={queryClient}>
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
         <NavBar/>
         <div style={{display: 'flex'}}>
             <LeftPanel/>
@@ -20,7 +24,8 @@ const Layout = () => {
             </div>
             <RightPanel/>
         </div>
-    </div>
+      </div>
+    </QueryClientProvider>
   )
 }
 
