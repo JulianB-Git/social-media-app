@@ -77,7 +77,9 @@ function App() {
       path: "/register",
       element: <Register />,
     },
-  ]);
+  ], {
+    basename: "/social-media-app",
+  });
 
   return (
     <div>

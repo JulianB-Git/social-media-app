@@ -20,7 +20,7 @@ const Post = ({ post }) => {
   const { user } = post
   const queryClient = useQueryClient()
 
-  const { isLoading, error, data } = useQuery(['likes', post.id], async () => {
+  const { isLoading, data } = useQuery(['likes', post.id], async () => {
     const response = await makeRequest.get(`/likes?postId=${post.id}`)
     return response.data
   })

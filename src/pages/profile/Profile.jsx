@@ -23,7 +23,7 @@ const Profile = () => {
   const { id } = useParams()
   const queryClient = useQueryClient()
 
-  const { isLoading, error, data } = useQuery(['user'], async () => {
+  const { isLoading, data } = useQuery(['user'], async () => {
     const response = await makeRequest.get(`/user/find/${id}`)
     return response.data
   })

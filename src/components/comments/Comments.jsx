@@ -12,7 +12,7 @@ const Comments = ({ postId }) => {
     const queryClient = useQueryClient()
     const [comment, setComment] = useState("")
 
-    const { isLoading, error, data } = useQuery(['comments'], async () => {
+    const { isLoading, data } = useQuery(['comments'], async () => {
         const response = await makeRequest.get(`/comments?postId=${postId}`)
         return response.data
       })
