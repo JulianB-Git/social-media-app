@@ -11,6 +11,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { AuthContext } from '../../context/authContext';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 const NavBar = () => {
 
@@ -36,7 +37,10 @@ const NavBar = () => {
         <EmailOutlinedIcon/>
         <NotificationsOutlinedIcon/>
         <div className="user">
-          <img src={currentUser.profilePic} alt="user" />
+          { currentUser.profilePic === null
+            ? <AccountBoxIcon/>
+            : <img src={currentUser.profilePic} alt="user" />
+          }
           <span>{currentUser.name}</span>
         </div>
       </div>

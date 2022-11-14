@@ -9,6 +9,7 @@ import { makeRequest } from "../../axios";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { BeatLoader } from 'react-spinners';
+import StockAvatar from '../../assets/StockAvatar.png'
 
 const Share = () => {
 
@@ -52,10 +53,7 @@ const Share = () => {
       <div className="container">
         <div className="top">
           <div className="left">
-            <img
-              src={currentUser.profilePic}
-              alt=""
-            />
+            <img src={currentUser.profilePic ? currentUser.profilePic : StockAvatar} alt="user" />
             <input type="text" placeholder={`What's on your mind ${currentUser.name}?`} value={description} onChange={ e =>  setDescription(e.target.value)}/>
           </div>
           <div className="right">

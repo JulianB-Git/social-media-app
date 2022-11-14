@@ -2,6 +2,7 @@ import './register.scss'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import { config } from "../../config/config";
 
 const Register = () => {
 
@@ -22,7 +23,7 @@ const Register = () => {
         e.preventDefault()
 
         try {
-            await axios.post("http://localhost:8082/api/auth/register", inputs)
+            await axios.post(config.base_url + "/auth/register", inputs)
         } catch(err){
             setErr(err.response.data.message)
         }

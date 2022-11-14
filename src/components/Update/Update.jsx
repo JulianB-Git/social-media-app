@@ -5,9 +5,12 @@ import { makeRequest } from "../../axios"
 import "./update.scss"
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { DotLoader } from 'react-spinners'
+import { useContext } from "react"
+import { AuthContext } from "../../context/authContext"
 
 const Update = ({ setOpenUpdate, user }) => {
 
+    const { setCurrentUser } = useContext(AuthContext)
     const queryClient = useQueryClient()
     const [loading, setLoading] = useState(false);
     const [cover, setCover] = useState(null)
@@ -23,9 +26,10 @@ const Update = ({ setOpenUpdate, user }) => {
             return makeRequest.put('/user', user)
         },
         {
-            onSuccess: () => {
+            onSuccess: async () => {
               //Invalidate and refetch
               queryClient.invalidateQueries(["user"])
+              setCurrentUser(user)
             },
         })
 

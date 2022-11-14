@@ -14,6 +14,8 @@ import Courses from '../../assets/12.png'
 import Fund from '../../assets/13.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/authContext'
+import { Link } from 'react-router-dom'
+import StockAvatar from '../../assets/StockAvatar.png'
 
 const LeftPanel = () => {
 
@@ -25,8 +27,10 @@ const LeftPanel = () => {
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img src={currentUser.profilePic} alt="user" />
-            <span>{currentUser.name}</span>
+            <img src={currentUser.profilePic ? currentUser.profilePic : StockAvatar} alt="user" />
+            <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: "none" }}>
+              <button>My Profile</button>
+            </Link>
           </div>
           <div className="item">
             <img src={Friends} alt="" />

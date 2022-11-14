@@ -31,6 +31,7 @@ const Login = () => {
             // Find a SPA solution to auth context does not progagate in time for protected route in App.js
             window.location.replace('/')
         } catch(err) {
+            setLoading(false)
             setErr(err.response.data.message)
         }
     }
@@ -72,14 +73,6 @@ const Login = () => {
                     </>
                 }
             </div>
-                
-            {/* </div>
-            <DotLoader
-                color='#6260e0'
-                loading={loading}
-                cssOverride={overrideCSS}
-                size={150}
-            /> */}
         </div>
     )
 }

@@ -1,5 +1,6 @@
 {
   "name": "social-media-app",
+  "homepage": "https://julianb-git.github.io/react-social-media-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

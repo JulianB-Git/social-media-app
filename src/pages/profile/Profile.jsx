@@ -15,6 +15,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { makeRequest } from '../../axios';
 import Update from '../../components/Update/Update';
+import { DotLoader } from 'react-spinners'
 
 const Profile = () => {
   const [openUpdate, setOpenUpdate] = useState(false)
@@ -53,12 +54,24 @@ const Profile = () => {
 
   return (
     <div className='profile'>
-      {isLoading ? "Loading..." : (
-        <>
-          <div className="images">
-            <img src={data.coverPic} className='cover' alt="" />
-            <img src={data.profilePic} className='profilePic' alt="" />
+      {isLoading
+        ? <div className="loading-container">
+            <DotLoader
+              color='#6260e0'
+              loading={isLoading}
+              size={150}
+            />
           </div>
+        : (
+        <>
+          { data.coverPic || data.profilePic
+            ? <div className="images">
+                <img src={data.coverPic} className='cover' alt="" />
+                <img src={data.profilePic} className='profilePic' alt="" />
+              </div> 
+            : null
+          }
+          
           <div className="profileContainer">
             <div className="user-info">
               <div className="left">
