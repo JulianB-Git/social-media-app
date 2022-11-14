@@ -1,9 +1,11 @@
+@import "../../style.scss";
+
 .login{
-height: 100vh;
-background-color: rgb(193, 190, 255);
-display: flex;
-align-items: center;
-justify-content: center;
+    height: 100vh;
+    background-color: rgb(193, 190, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .card{
         width: 50%;
@@ -12,6 +14,10 @@ justify-content: center;
         border-radius: 10px;
         min-height: 600px;
         overflow: hidden;
+
+        @include mobile{
+            width: 90%;
+        }
 
         .loading-container{
             flex: 1;
@@ -29,6 +35,10 @@ justify-content: center;
             padding: 50px;
             gap: 30px;
             color: white;
+
+            @include mobile{
+                display: none;
+            }
 
             h1{
                 font-size: 100px;
@@ -59,6 +69,10 @@ justify-content: center;
             gap: 50px;
             justify-content: center;
 
+            @include mobile{
+                padding: 20px;
+            }
+
             h1{
                 color: #555;
             }
@@ -81,6 +95,25 @@ justify-content: center;
                     color: white;
                     font-weight: bold;
                     cursor: pointer;
+                }
+
+                .registration{
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+
+                .register{
+                    // width: 50%;
+                    height: 20px;
+                    border: 0;
+                    background-color: white;
+                    color: black;
+                }
+
+                a{
+                    width: 50%;
                 }
             }
         }

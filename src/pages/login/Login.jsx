@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
 import { DotLoader } from 'react-spinners'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 const Login = () => {
 
     const { login } = useContext(AuthContext)
+    const { width } = useWindowDimensions()
 
     const overrideCSS = {
         display: "flex",
@@ -66,6 +68,14 @@ const Login = () => {
                         <form>
                             <input type="text" placeholder='Username' name='username' onChange={handleChange}/>
                             <input type="password" placeholder='Password' name='password' onChange={handleChange}/>
+                            { width <= 480
+                                ? <div className='registration'>
+                                    <span>Don't have an account ?</span>
+                                    <Link to='/register'>
+                                        <button className='register'>Register</button>
+                                    </Link>
+                                  </div>
+                                : null }
                             {err && err}
                             <button onClick={handleLogin}>Login</button>
                         </form>

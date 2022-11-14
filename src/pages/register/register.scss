@@ -1,3 +1,5 @@
+@import "../../style.scss";
+
 .register{
     height: 100vh;
     background-color: rgb(193, 190, 255);
@@ -13,6 +15,10 @@
             border-radius: 10px;
             min-height: 600px;
             overflow: hidden;
+
+            @include mobile{
+                width: 90%;
+            }
     
             .left{
                 flex: 1;
@@ -23,6 +29,10 @@
                 padding: 50px;
                 gap: 30px;
                 color: white;
+
+                @include mobile{
+                    display: none;
+                }
     
                 h1{
                     font-size: 100px;
@@ -52,6 +62,10 @@
                 flex-direction: column;
                 gap: 50px;
                 justify-content: center;
+
+                @include mobile{
+                    padding: 20px;
+                }
     
                 h1{
                     color: #555;
@@ -75,6 +89,24 @@
                         color: white;
                         font-weight: bold;
                         cursor: pointer;
+                    }
+
+                    .have-account{
+                        font-size: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                    }
+    
+                    .login{
+                        height: 20px;
+                        border: 0;
+                        background-color: white;
+                        color: black;
+                    }
+    
+                    a{
+                        width: 50%;
                     }
                 }
             }

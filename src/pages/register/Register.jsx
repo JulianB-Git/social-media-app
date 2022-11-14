@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { config } from "../../config/config";
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 const Register = () => {
 
@@ -13,6 +14,7 @@ const Register = () => {
         name: ""
     })
 
+    const { width } = useWindowDimensions()
     const [err, setErr] = useState(null)
 
     const handleChange = e => {
@@ -47,6 +49,14 @@ const Register = () => {
                     <input type="email" placeholder='Email' name='email' onChange={handleChange}/>
                     <input type="password" placeholder='Password' name='password' onChange={handleChange}/>
                     <input type="text" placeholder='Name' name='name' onChange={handleChange}/>
+                    { width <= 480
+                        ? <div className='have-account'>
+                            <span>Already have an account ?</span>
+                            <Link to='/login'>
+                                <button className='login'>Login</button>
+                            </Link>
+                            </div>
+                        : null }
                     {err && err}
                     <button onClick={handleSubmit}>Register</button>
                 </form>
