@@ -29,7 +29,7 @@ const Login = () => {
             await login(inputs)
             setLoading(false)
             // Find a SPA solution to auth context does not progagate in time for protected route in App.js
-            window.location.replace('/')
+            window.location.replace('/social-media-app')
         } catch(err) {
             setLoading(false)
             setErr(err.response.data.message)
