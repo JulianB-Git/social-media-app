@@ -13,6 +13,13 @@
     justify-content: center;
     z-index: 999;
 
+    .loading-container{
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .wrapper {
       margin: auto;
       width: 40%;

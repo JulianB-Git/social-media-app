@@ -8,17 +8,20 @@ import { useMutation, useQueryClient  } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
+import { BeatLoader } from 'react-spinners';
 
 const Share = () => {
 
     const [file, setFile] = useState(null)
     const [description, setDescription] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const {currentUser} = useContext(AuthContext)
     const queryClient = useQueryClient()
 
     const mutation = useMutation(
-    async (newPost) => {        
+    async (newPost) => {
+      setLoading(true)        
       if(file !== null){
         const uploadUrl = await makeRequest.get(`/file/generate-upload-url/${newPost.uuid}`)
         await axios.put(uploadUrl.data, file)
@@ -30,8 +33,9 @@ const Share = () => {
     },
     {
         onSuccess: () => {
+          setLoading(false)
           setFile(null)
-          setDescription('')
+          setDescription('') 
           //Invalidate and refetch
           queryClient.invalidateQueries(["posts"])
         },
@@ -78,7 +82,16 @@ const Share = () => {
             </div>
           </div>
           <div className="right">
-            <button onClick={handleShare}>Share</button>
+            <button disabled={loading} onClick={handleShare}>
+              { loading
+                ? <BeatLoader
+                    color='#ffffff'
+                    loading={loading}
+                    size={7}
+                  />
+                : "Share"
+              }
+            </button>
           </div>
         </div>
       </div>

@@ -13,6 +13,13 @@ justify-content: center;
         min-height: 600px;
         overflow: hidden;
 
+        .loading-container{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .left{
             flex: 1;
             display: flex;

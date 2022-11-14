@@ -2,6 +2,7 @@ import Post from '../post/Post';
 import './posts.scss'
 import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
+import { DotLoader } from 'react-spinners'
 
 const Posts = ({ userId }) => {
 
@@ -17,9 +18,20 @@ const Posts = ({ userId }) => {
 
   return (
     <div className='posts'>
-      { error ? "Something went wrong!" : (isLoading ? "Loading..." : data.map((post) => (
+      { isLoading &&
+        <div className="loading-container">
+          <DotLoader
+            color='#6260e0'
+            loading={isLoading}
+            size={150}
+          /> 
+        </div>
+      }
+
+      { error ? "Something went wrong!"
+      : data?.map((post) => (
         <Post post={post} key={post.id}/>
-      )))}
+      ))}
     </div>
   )
 }

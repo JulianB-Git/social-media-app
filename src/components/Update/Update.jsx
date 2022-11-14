@@ -4,10 +4,12 @@ import { useState } from "react"
 import { makeRequest } from "../../axios"
 import "./update.scss"
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { DotLoader } from 'react-spinners'
 
 const Update = ({ setOpenUpdate, user }) => {
 
     const queryClient = useQueryClient()
+    const [loading, setLoading] = useState(false);
     const [cover, setCover] = useState(null)
     const [profile, setProfile] = useState(null)
     const [inputs, setInputs] = useState({
@@ -33,6 +35,7 @@ const Update = ({ setOpenUpdate, user }) => {
 
     const handleUpdate = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
         let coverUrl = user.coverPic
         let profileUrl = user.profilePic
@@ -50,6 +53,7 @@ const Update = ({ setOpenUpdate, user }) => {
         }
 
         mutation.mutate({ ...inputs })
+        setLoading(false)
         setOpenUpdate(false)
         setCover(null);
         setProfile(null);
@@ -58,78 +62,88 @@ const Update = ({ setOpenUpdate, user }) => {
 
   return (
     <div className="update">
-      <div className="wrapper">
-        <h1>Update Your Profile</h1>
-        <form>
-          <div className="files">
-            <label htmlFor="cover">
-              <span>Cover Picture</span>
-              <div className="imgContainer">
-                <img
-                  src={
-                    cover
-                      ? URL.createObjectURL(cover)
-                      : user.coverPic
-                  }
-                  alt=""
-                />
-                <CloudUploadIcon className="icon" />
-              </div>
-            </label>
-            <input
-              type="file"
-              id="cover"
-              style={{ display: "none" }}
-              onChange={(e) => setCover(e.target.files[0])}
-            />
-            <label htmlFor="profile">
-              <span>Profile Picture</span>
-              <div className="imgContainer">
-                <img
-                  src={
-                    profile
-                      ? URL.createObjectURL(profile)
-                      : user.profilePic
-                  }
-                  alt=""
-                />
-                <CloudUploadIcon className="icon" />
-              </div>
-            </label>
-            <input
-              type="file"
-              id="profile"
-              style={{ display: "none" }}
-              onChange={(e) => setProfile(e.target.files[0])}
+      {loading
+        ? <div className="loading-container">
+            <DotLoader
+              color='#6260e0'
+              loading={loading}
+              size={150}
             />
           </div>
-          <label>Name</label>
-          <input
-            type="text"
-            value={inputs.name}
-            name="name"
-            onChange={handleChange}
-          />
-          <label>Country / City</label>
-          <input
-            type="text"
-            name="city"
-            value={inputs.city}
-            onChange={handleChange}
-          />
-          <label>Website</label>
-          <input
-            type="text"
-            name="website"
-            value={inputs.website}
-            onChange={handleChange}
-          />
-          <button onClick={handleUpdate}>Update</button>
-        </form>
-        <button className="close" onClick={() => setOpenUpdate(false)}>
-          X
-        </button>
-      </div>
+        :
+        <div className="wrapper">
+          <h1>Update Your Profile</h1>
+          <form>
+            <div className="files">
+              <label htmlFor="cover">
+                <span>Cover Picture</span>
+                <div className="imgContainer">
+                  <img
+                    src={
+                      cover
+                        ? URL.createObjectURL(cover)
+                        : user.coverPic
+                    }
+                    alt=""
+                  />
+                  <CloudUploadIcon className="icon" />
+                </div>
+              </label>
+              <input
+                type="file"
+                id="cover"
+                style={{ display: "none" }}
+                onChange={(e) => setCover(e.target.files[0])}
+              />
+              <label htmlFor="profile">
+                <span>Profile Picture</span>
+                <div className="imgContainer">
+                  <img
+                    src={
+                      profile
+                        ? URL.createObjectURL(profile)
+                        : user.profilePic
+                    }
+                    alt=""
+                  />
+                  <CloudUploadIcon className="icon" />
+                </div>
+              </label>
+              <input
+                type="file"
+                id="profile"
+                style={{ display: "none" }}
+                onChange={(e) => setProfile(e.target.files[0])}
+              />
+            </div>
+            <label>Name</label>
+            <input
+              type="text"
+              value={inputs.name}
+              name="name"
+              onChange={handleChange}
+            />
+            <label>Country / City</label>
+            <input
+              type="text"
+              name="city"
+              value={inputs.city}
+              onChange={handleChange}
+            />
+            <label>Website</label>
+            <input
+              type="text"
+              name="website"
+              value={inputs.website}
+              onChange={handleChange}
+            />
+            <button onClick={handleUpdate}>Update</button>
+          </form>
+          <button className="close" onClick={() => setOpenUpdate(false)}>
+            X
+          </button>
+        </div>
+      }
     </div>
   )
 }
