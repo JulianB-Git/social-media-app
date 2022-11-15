@@ -11,6 +11,7 @@ import moment from 'moment/moment';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import { AuthContext } from '../../context/authContext';
+import StockAvatar from '../../assets/StockAvatar.png'
 
 const Post = ({ post }) => {
 
@@ -64,7 +65,7 @@ const Post = ({ post }) => {
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={user.profilePic} alt="" />
+            <img src={currentUser.profilePic ? currentUser.profilePic : StockAvatar} alt="user" />
             <div className="details">
               <Link to={`/profile/${user.id}`} style={{textDecoration: "none", color: "inherit"}}>
                 <span className='name'>{user.name}</span>

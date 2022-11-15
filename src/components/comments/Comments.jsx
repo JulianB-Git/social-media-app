@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { makeRequest } from '../../axios';
 import { AuthContext } from '../../context/authContext';
 import './comments.scss'
+import StockAvatar from '../../assets/StockAvatar.png'
 
 const Comments = ({ postId }) => {
 
@@ -12,7 +13,7 @@ const Comments = ({ postId }) => {
     const queryClient = useQueryClient()
     const [comment, setComment] = useState("")
 
-    const { isLoading, data } = useQuery(['comments'], async () => {
+    const { isLoading, data } = useQuery([`comments/${postId}`], async () => {
         const response = await makeRequest.get(`/comments?postId=${postId}`)
         return response.data
       })
@@ -24,7 +25,7 @@ const Comments = ({ postId }) => {
       {
           onSuccess: () => {
             //Invalidate and refetch
-            queryClient.invalidateQueries(["comments"])
+            queryClient.invalidateQueries([`comments/${postId}`])
           },
       })
   
@@ -38,7 +39,7 @@ const Comments = ({ postId }) => {
     return (
         <div className='comments'>
             <div className="write-comment">
-                <img src={currentUser.profilePic} alt="" />
+                <img src={currentUser.profilePic ? currentUser.profilePic : StockAvatar} alt="user" />
                 <input 
                     type="text"
                     placeholder='Write a comment...'
@@ -48,7 +49,7 @@ const Comments = ({ postId }) => {
             </div>
             {isLoading ? "Loading..." : data.map((comment) => (
                 <div className="comment" key={comment.id}>
-                    <img src={comment.user.profilePic} alt="" />
+                    <img src={comment.user.profilePic ? comment.user.profilePic : StockAvatar} alt="" />
                     <div className="info">
                         <span>{comment.user.name}</span>
                         <p>{comment.comment}</p>

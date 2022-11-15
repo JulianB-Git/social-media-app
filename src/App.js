@@ -16,6 +16,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import NotFound from "./pages/not found/NotFound";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -76,6 +77,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ], {
     basename: "/social-media-app",
